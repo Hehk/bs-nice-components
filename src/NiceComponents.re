@@ -26,6 +26,8 @@ let make = (~tag, ~debugName="", styles) : (module Component) =>
    });
 
 /* Default Tags */
+/* The list comes from html-tag-name */
+/* TODO: create a macro to get rid of this mess */
 let a = make(~tag="a");
 
 let abbr = make(~tag="abbr");
