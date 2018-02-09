@@ -1,1 +1,0 @@
-__tests__/NiceComponents_test.cmj : src/NiceComponents.cmj
