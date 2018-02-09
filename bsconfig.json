@@ -20,7 +20,7 @@
     "bs-nice",
     "reason-react"
   ],
-  "namespace": true,
+  "namespace": false,
   "refmt": 3,
   "reason": {"react-jsx": 2}
 }

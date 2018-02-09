@@ -13,3 +13,11 @@
 1	26	1518219046	BsNiceComponents.cmi	4ef4083d2f27c4f0
 0	26	1518219524	BsNiceComponents.cmi	4ef4083d2f27c4f0
 0	25	1518220026	BsNiceComponents.cmi	4ef4083d2f27c4f0
+0	10	1518220309	__tests__/NiceComponents_test.mlast.d	d757f3e4c04eb774
+1	10	1518220309	src/NiceComponents.mlast.d	bc64e374df812295
+0	27	1518220313	src/NiceComponents.cmj	8eaa94752c2a8c51
+0	27	1518220313	/Users/kylehenderson/wrk/personal/bs-nice-components/lib/js/src/NiceComponents.bs.js	8eaa94752c2a8c51
+0	27	1518220313	src/NiceComponents.cmi	8eaa94752c2a8c51
+27	50	1518220313	__tests__/NiceComponents_test.cmj	70f4e4ecb3a383c4
+27	50	1518220313	/Users/kylehenderson/wrk/personal/bs-nice-components/lib/js/__tests__/NiceComponents_test.bs.js	70f4e4ecb3a383c4
+27	50	1518220313	__tests__/NiceComponents_test.cmi	70f4e4ecb3a383c4

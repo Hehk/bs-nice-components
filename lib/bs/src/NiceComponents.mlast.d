@@ -1,1 +1,1 @@
-src/NiceComponents-BsNiceComponents.cmj :
+src/NiceComponents.cmj :
