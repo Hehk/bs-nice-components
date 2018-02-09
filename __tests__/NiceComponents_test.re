@@ -1,8 +1,11 @@
 open Jest;
 
-describe("Expect", () => {
-  open Expect;
-  open! Expect.Operators;
+Enzyme.configureEnzyme(Enzyme.react_16_adapter());
 
-  test("==", () => expect(1 + 2) === 3)
+describe("make", () => {
+  open Expect;
+  module Basic = (val NiceComponents.make(~tag="div", ~debugName="Basic", [||]));
+  test("Basic component renders", () =>
+    Enzyme.shallow(<Basic />) |> Enzyme.exists |> expect |> toBe(true)
+  );
 });

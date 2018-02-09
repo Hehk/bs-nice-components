@@ -15,12 +15,14 @@
   "devDependencies": {
     "bs-jest": "^0.3.2",
     "bs-platform": "^2.1.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "jest": "^22.2.2"
   },
   "description": "Library to that makes creating ReasonReact components with bs-nice really nice",
   "main": "index.js",
   "repository": "http://github.com/hehk/bs-nice-components",
   "dependencies": {
+    "bs-enzyme": "^0.3.1",
     "bs-nice": "^0.1.6",
     "reason-react": "^0.3.2"
   }
