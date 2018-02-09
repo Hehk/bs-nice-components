@@ -13,6 +13,7 @@ let make = (~tag, ~debugName="", styles) : (module Component) =>
    {
      let component = ReasonReact.statelessComponent(debugName);
      let className = Nice.css(styles);
+     /* You can pass in props like onClick to the props object but don't unless completely necessary */
      let make = (~props=?, children) => {
        ...component,
        render: _self => {
