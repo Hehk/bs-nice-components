@@ -26,9 +26,8 @@ let make = (~tag, ~debugName="", styles) : (module Component) =>
      };
    });
 
-let getStyles = (html) => {
-  Nice.extract(html).css |>  List.fold_left((a, b) => a ++ b, "");
-};
+/* Minimalistic implementation of creating a stylesheet for server-rendering */
+let getStyles = html => Nice.extract(html).css |> List.fold_left((a, b) => a ++ b, "");
 
 /* Default Tags */
 /* The list comes from html-tag-name */
