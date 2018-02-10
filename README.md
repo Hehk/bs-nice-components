@@ -34,6 +34,6 @@ npm install --save bs-nice-components
 This is currently very early days. Expect this library to very volatile as I make changes in the future.
 
 ## Todo
-[ ] Create a macro to generate the tag functions
-[ ] Add a type safe way to pass parameters to components
-[ ] make the whole world beautiful... and type-safe :P
+- [ ] Create a macro to generate the tag functions
+- [ ] Add a type safe way to pass parameters to components
+- [ ] make the whole world beautiful... and type-safe :P
