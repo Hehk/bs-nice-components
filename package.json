@@ -23,7 +23,7 @@
   "repository": "http://github.com/hehk/bs-nice-components",
   "dependencies": {
     "bs-enzyme": "^0.3.1",
-    "bs-nice": "^0.1.6",
+    "bs-nice": "http://github.com/hehk/bs-nice",
     "reason-react": "^0.3.2"
   }
 }
