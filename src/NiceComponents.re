@@ -26,6 +26,10 @@ let make = (~tag, ~debugName="", styles) : (module Component) =>
      };
    });
 
+let getStyles = (html) => {
+  Nice.extract(html).css |>  List.fold_left((a, b) => a ++ b, "");
+};
+
 /* Default Tags */
 /* The list comes from html-tag-name */
 /* TODO: create a macro to get rid of this mess */
