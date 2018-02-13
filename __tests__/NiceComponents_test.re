@@ -20,6 +20,62 @@ describe("make", () => {
   });
 });
 
+describe("addStyles function", () => {
+  open Expect;
+  open Nice;
+  test("Adds styles to unstyled component", () => {
+    let styles = [|Nice.Color(Red)|];
+    module UnStyled = (val NiceComponents.make(~tag="div", [||]));
+    module Styled = (val NiceComponents.addStyles(styles, (module UnStyled)));
+    styles |> expect |> toEqual(Styled.__styles);
+  });
+  test("new styles are appended to old ones", () => {
+    let styles = [|Nice.Color(Red)|];
+    let newStyles = [|BackgroundColor(White)|];
+    module Original = (val NiceComponents.make(~tag="div", styles));
+    module Modified = (val NiceComponents.addStyles(newStyles, (module Original)));
+    Array.append(styles, newStyles) |> expect |> toEqual(Modified.__styles);
+  });
+  test("ClassNames should not equal before and after adding styles", () => {
+    let styles = [|Color(Red)|];
+    let newStyles = [|BackgroundColor(White)|];
+    module Original = (val NiceComponents.make(~tag="div", styles));
+    module Modified = (val NiceComponents.addStyles(newStyles, (module Original)));
+    Original.className === Modified.className |> expect |> toBe(false);
+  });
+});
+
+describe("AddStyles functor", () => {
+  open Expect;
+  open Nice;
+  test("Adds styles to unstyled component", () => {
+    let styles = [|Nice.Color(Red)|];
+    module UnStyled = (val NiceComponents.make(~tag="div", [||]));
+    module Styled =
+      NiceComponents.AddStyles(
+        {
+          let newStyles = styles;
+        },
+        UnStyled
+      );
+    styles |> expect |> toEqual(Styled.__styles);
+  });
+  test("new styles are appended to old ones", () => {
+    let styles = [|Nice.Color(Red)|];
+    let newStyles = [|BackgroundColor(White)|];
+    module Original = (val NiceComponents.make(~tag="div", styles));
+    module Modified = NiceComponents.AddStyles({ let newStyles = newStyles }, Original);
+    Array.append(styles, newStyles) |> expect |> toEqual(Modified.__styles);
+  });
+  test("ClassNames should not equal before and after adding styles", () => {
+    let styles = [|Color(Red)|];
+    let newStyles = [|BackgroundColor(White)|];
+    module Original = (val NiceComponents.make(~tag="div", styles));
+    module Modified = NiceComponents.AddStyles({ let newStyles = newStyles }, Original);
+    Original.className === Modified.className |> expect |> toBe(false);
+  });
+});
+
 /* A small subset of the tags */
 describe("NiceComponents.<tag> renders the correct tag", () => {
   open Expect;

@@ -1,7 +1,11 @@
 module type Component = {
   open ReasonReact;
+  let __tag: string;
+  let __debugName: string;
+  let __styles: array(Nice.style);
   let className: string;
-  let component: componentSpec(stateless, stateless, noRetainedProps, noRetainedProps, actionless);
+  let component:
+    componentSpec(stateless, stateless, noRetainedProps, noRetainedProps, actionless);
   let make:
     (~props: Js.t({..})=?, array(reactElement)) =>
     componentSpec(stateless, stateless, noRetainedProps, noRetainedProps, actionless);
@@ -24,7 +28,21 @@ let make = (~tag, ~debugName="", styles) : (module Component) =>
          };
        }
      };
+     /* Parameters used creating new versions of this module */
+     let __tag = tag;
+     let __debugName = debugName;
+     let __styles = styles;
    });
+
+let addStyles = (newStyles, x: (module Component)) : (module Component) => {
+  module Comp = (val x);
+  make(~tag=Comp.__tag, ~debugName=Comp.__debugName, Array.append(Comp.__styles, newStyles));
+};
+
+module AddStyles = (NewStyles: {let newStyles: array(Nice.style);}, Component: Component) => {
+  let __styles = Array.append(Component.__styles, NewStyles.newStyles);
+  let className = Nice.css(__styles);
+};
 
 /* Minimalistic implementation of creating a stylesheet for server-rendering */
 let getStyles = html => Nice.extract(html).css |> List.fold_left((a, b) => a ++ b, "");
