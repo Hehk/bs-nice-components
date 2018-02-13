@@ -40,6 +40,7 @@ let addStyles = (newStyles, x: (module Component)) : (module Component) => {
 };
 
 module AddStyles = (NewStyles: {let newStyles: array(Nice.style);}, Component: Component) => {
+  include Component;
   let __styles = Array.append(Component.__styles, NewStyles.newStyles);
   let className = Nice.css(__styles);
 };
