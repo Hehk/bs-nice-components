@@ -10,6 +10,14 @@ module type Component = {
     componentSpec(stateless, stateless, noRetainedProps, noRetainedProps, actionless);
 };
 
+let createRender = (className, tag, props, children, _self) => {
+  let cls = {"className": className};
+  switch props {
+  | None => ReasonReact.createDomElement(tag, ~props=cls, children)
+  | Some(x) => ReasonReact.createDomElement(tag, ~props=Js.Obj.assign(cls, x), children)
+  };
+};
+
 /* Generated Module */
 let make = (~tag, ~debugName="", styles) : (module Component) =>
   (module
@@ -17,16 +25,7 @@ let make = (~tag, ~debugName="", styles) : (module Component) =>
      let component = ReasonReact.statelessComponent(debugName);
      let className = Nice.css(styles);
      /* You can pass in props like onClick to the props object but don't unless completely necessary */
-     let make = (~props=?, children) => {
-       ...component,
-       render: _self => {
-         let cls = {"className": className};
-         switch props {
-         | None => ReasonReact.createDomElement(tag, ~props=cls, children)
-         | Some(x) => ReasonReact.createDomElement(tag, ~props=Js.Obj.assign(cls, x), children)
-         };
-       }
-     };
+     let make = (~props=?, children) => {...component, render: createRender(className, tag, props, children)};
      /* Parameters used creating new versions of this module */
      let __tag = tag;
      let __debugName = debugName;
@@ -42,6 +41,7 @@ module AddStyles = (NewStyles: {let newStyles: array(Nice.style);}, Component: C
   include Component;
   let __styles = Array.append(NewStyles.newStyles, Component.__styles);
   let className = Nice.css(__styles);
+  let make = (~props=?, children) => {...component, render: createRender(className, __tag, props, children)};
 };
 
 /* Minimalistic implementation of creating a stylesheet for server-rendering */
