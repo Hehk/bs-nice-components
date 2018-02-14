@@ -30,11 +30,11 @@ describe("addStyles function", () => {
     styles |> expect |> toEqual(Styled.__styles);
   });
   test("new styles are appended to old ones", () => {
-    let styles = [|Nice.Color(Red)|];
-    let newStyles = [|BackgroundColor(White)|];
+    let styles = [|Color(Red)|];
+    let newStyles = [|Color(White)|];
     module Original = (val NiceComponents.make(~tag="div", styles));
     module Modified = (val NiceComponents.addStyles(newStyles, (module Original)));
-    Array.append(styles, newStyles) |> expect |> toEqual(Modified.__styles);
+    Array.append(newStyles, styles) |> expect |> toEqual(Modified.__styles);
   });
   test("ClassNames should not equal before and after adding styles", () => {
     let styles = [|Color(Red)|];
@@ -65,7 +65,7 @@ describe("AddStyles functor", () => {
     let newStyles = [|BackgroundColor(White)|];
     module Original = (val NiceComponents.make(~tag="div", styles));
     module Modified = NiceComponents.AddStyles({ let newStyles = newStyles }, Original);
-    Array.append(styles, newStyles) |> expect |> toEqual(Modified.__styles);
+    Array.append(newStyles, styles) |> expect |> toEqual(Modified.__styles);
   });
   test("ClassNames should not equal before and after adding styles", () => {
     let styles = [|Color(Red)|];

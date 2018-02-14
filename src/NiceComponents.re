@@ -4,8 +4,7 @@ module type Component = {
   let __debugName: string;
   let __styles: array(Nice.style);
   let className: string;
-  let component:
-    componentSpec(stateless, stateless, noRetainedProps, noRetainedProps, actionless);
+  let component: componentSpec(stateless, stateless, noRetainedProps, noRetainedProps, actionless);
   let make:
     (~props: Js.t({..})=?, array(reactElement)) =>
     componentSpec(stateless, stateless, noRetainedProps, noRetainedProps, actionless);
@@ -36,12 +35,12 @@ let make = (~tag, ~debugName="", styles) : (module Component) =>
 
 let addStyles = (newStyles, x: (module Component)) : (module Component) => {
   module Comp = (val x);
-  make(~tag=Comp.__tag, ~debugName=Comp.__debugName, Array.append(Comp.__styles, newStyles));
+  make(~tag=Comp.__tag, ~debugName=Comp.__debugName, Array.append(newStyles, Comp.__styles));
 };
 
 module AddStyles = (NewStyles: {let newStyles: array(Nice.style);}, Component: Component) => {
   include Component;
-  let __styles = Array.append(Component.__styles, NewStyles.newStyles);
+  let __styles = Array.append(NewStyles.newStyles, Component.__styles);
   let className = Nice.css(__styles);
 };
 
