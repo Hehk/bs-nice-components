@@ -32,14 +32,17 @@ let make = (~tag, ~debugName="", styles) : (module Component) =>
      let __styles = styles;
    });
 
+/* So i do not have to change 2 places if this is bad again X.x */
+let combineStyles = (oldStyles, newStyles) => Array.append(oldStyles, newStyles);
+
 let addStyles = (newStyles, x: (module Component)) : (module Component) => {
   module Comp = (val x);
-  make(~tag=Comp.__tag, ~debugName=Comp.__debugName, Array.append(newStyles, Comp.__styles));
+  make(~tag=Comp.__tag, ~debugName=Comp.__debugName, combineStyles(Comp.__styles, newStyles));
 };
 
 module AddStyles = (NewStyles: {let newStyles: array(Nice.style);}, Component: Component) => {
   include Component;
-  let __styles = Array.append(NewStyles.newStyles, Component.__styles);
+  let __styles = combineStyles(Component.__styles, NewStyles.newStyles);
   let className = Nice.css(__styles);
   let make = (~props=?, children) => {...component, render: createRender(className, __tag, props, children)};
 };
